@@ -1,0 +1,42 @@
+repo: http://github.com/celer/test-cd-private
+services:
+  - frontend:
+      install_script:
+        - npm install .
+      test_script:
+        - npm test
+      language: nodejs
+      nodejs:
+        - 0.10
+        - 0.11
+      propeller:
+        ports:
+          FRONTEND_HTTP: 8000 
+          MYSQL: 3306
+        services:
+          - postgres
+      heroku:
+        app: foaming-horse
+      herokudpl:
+        api_key: 976d7834-9a52-4fa2-88b5-a49eaad7a80e
+        app: foaming-horse
+      openshiftdpl:
+        user: crobe03@ca.com 
+        password: crobe03!@#
+        domain: crobe03 
+        app: thai         
+  - backend:
+      language: nodejs
+      propeller:
+        instances: 1
+      heroku:
+        app: bouncing-horse
+      herokudpl:
+        api_key: 976d7834-9a52-4fa2-88b5-a49eaad7a80e
+        app: bouncing-horse
+      openshiftdpl:
+        user: crobe03@ca.com 
+        password: crobe03!@#
+        domain: crobe03 
+        app: chi        
+
